@@ -218,13 +218,53 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    return _.reduce(collection, function(accumulator, item) {
+      if (iterator !== undefined) {
+        if (iterator(item) && accumulator) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        if (item && accumulator) {
+          return true;
+        } else {
+          return false;
+        }
+
+      }
+    }, true)
   };
 
+  // !((!expression1 && !expression2));
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
-  };
+    if (collection.length === 0) {
+      return false;
+    }
+    var isEvery = _.every(collection, iterator);
+    if (isEvery) {
+      return true;
+    } else {
+      return _.reduce(collection, function(accumulator, item) {
+        if (iterator !== undefined) {
+          if (iterator(item) || accumulator) {
+            return true;
+          } else {
+            return false;
+          }
+        } else {
+          if (item || accumulator) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }, false)
+    }
+  }  
 
 
   /**
@@ -246,11 +286,24 @@
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
   _.extend = function(obj) {
+    _.each(arguments, function(item) {
+      for (var key in item) {
+        obj[key] = item[key];
+      }
+    });
+    return obj;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
   _.defaults = function(obj) {
+    _.each(arguments, function(item) {
+      for (var key in item) {
+        if (!obj.hasOwnProperty(key))
+        obj[key] = item[key];
+      }
+    });
+    return obj;
   };
 
 
