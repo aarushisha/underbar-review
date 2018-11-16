@@ -251,7 +251,7 @@
 
       it('should return all odd numbers in an array', function() {
         var isOdd = function(num) { return num % 2 !== 0; };
-        var odds = FILL_ME_IN;
+        var odds = _.filter([1, 2, 3, 4, 5, 6], isOdd);
 
         expect(odds).to.eql([1, 3, 5]);
       });
@@ -330,9 +330,9 @@
 
       it('should handle iterators that work with a sorted array', function() {
         var iterator = function(value) { return value === 1; };
-        var numbers = [1, 2, 2, 3, 4, 4];
+        var numbers = [1, 2, 2, 3, 4, 4]; // [true, false, false, false, false, false]
 
-        expect(_.uniq(FILL_ME_IN)).to.eql([1, 2]);
+        expect(_.uniq(numbers)).to.eql([1, 2]);
       });
 
       it('should produce a brand new array instead of modifying the input array', function() {
@@ -383,7 +383,9 @@
       });
 
       it('should apply a function to every value in an array', function() {
-        var multiplyByTwo = FILL_ME_IN;
+        var multiplyByTwo = function(num) {
+          return num * 2;
+        };
 
         expect(_.map([1, 2, 3], multiplyByTwo)).to.eql([2, 4, 6]);
       });
@@ -406,7 +408,7 @@
           { name: 'curly', age: 50 }
         ];
 
-        expect(_.pluck(people, 'name')).to.FILL_ME_IN(['moe', 'curly']);
+        expect(_.pluck(people, 'name')).to.eql(['moe', 'curly']);
       });
 
       it('should not modify the original array', function() {
@@ -417,7 +419,7 @@
 
         _.pluck(people, 'name');
 
-        expect(people).to.FILL_ME_IN([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
+        expect(people).to.eql([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
       });
     });
 
@@ -474,7 +476,7 @@
         var orderTraversed = [];
 
         _.reduce([1, 2, 3, 4], function(memo, item) {
-          // FILL_ME_IN
+            orderTraversed.push(item);
           // Add a line here that makes this test pass
           // for a working implementation of reduce
           return memo;
