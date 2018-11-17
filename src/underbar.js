@@ -1,3 +1,4 @@
+
 (function() {
   'use strict';
 
@@ -114,24 +115,36 @@
   };
 
   // Produce a duplicate-free version of the array.
+  //create new array of iterator(item) values
+  //iterate thru new array for unique values, push the original values of the unique values into return array
   _.uniq = function(array, isSorted, iterator) {
+    if (isSorted === false || isSorted === undefined) {
+      array = array.sort();
+    }
     var returnArray = [];
-    if (iterator !== undefined) {
-      _.each(array, function(item) {
-        if(!returnArray.includes(iterator(item))) {
-          var iterated = iterator(item);
-          returnArray.push(iterated);
-        }
-      });
-    } else {
+    var iteratedArray = [];
+
     _.each(array, function(item) {
-      if (!returnArray.includes(item)) {
-        returnArray.push(item);
-      }
+      console.log(isSorted);
+      if (iterator !== undefined) {
+        if (!iteratedArray.includes(iterator(item))) {
+          iteratedArray.push(iterator(item));
+          returnArray.push(item);  
+          }
+        } else {
+          console.log('in else');
+          console.log(!returnArray.includes(item));
+        if (!returnArray.includes(item)) {
+          returnArray.push(item);
+          console.log("returnArray", returnArray);
+        }
+      }  
     });
-  }
     return returnArray;
-  };
+  }
+ 
+    
+
 
 
   // Return the results of applying an iterator to each element.
@@ -346,8 +359,29 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
+  
   _.memoize = function(func) {
+    //build up args array, return function
+    //do a check with args to see if it's in storage
+    //if args are in storage, return result
+    //else func.apply(null, args)
+    //add args to storage
+    //return result;
+    
+    var storage = {};
+    return function() {
+    var args = JSON.stringify(arguments)
+    if (storage[args]) {
+      return storage[args];
+    } else {
+      storage[args] = func.apply(this, arguments);
+    }
+    return storage[args];
+  }
   };
+
+
+  
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.
@@ -356,6 +390,14 @@
   // parameter. For example _.delay(someFunction, 500, 'a', 'b') will
   // call someFunction('a', 'b') after 500ms
   _.delay = function(func, wait) {
+    var args = [];
+    for (var key in arguments) {
+      args.push(arguments[key]);
+    }
+    args.splice(0,2);
+    setTimeout(function() {
+       func.apply(null, args);
+    }, wait);
   };
 
 
@@ -370,6 +412,14 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var copyArray = array.slice();
+    var returnResults = [];
+    while (copyArray.length > 0) {
+      var randomNumber = Math.floor(Math.random() * (copyArray.length - 0)) + 0;
+      returnResults.push(copyArray[randomNumber]);
+      copyArray.splice(randomNumber,1);
+    }
+    return returnResults;
   };
 
 
