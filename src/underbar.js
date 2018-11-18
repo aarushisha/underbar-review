@@ -40,7 +40,7 @@
   // last element.
   _.last = function(array, n) {
     if (n === undefined) {
-      return array[array.length-1]; 
+      return array[array.length-1];
     } else if (array.length < n) {
       return array;
     } else if (n === 0) {
@@ -49,7 +49,7 @@
       return array.slice(array.length - (n));
     }
 
-    
+
 
   };
 
@@ -62,7 +62,7 @@
     if (Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
         iterator(collection[i], i, collection);
-      } 
+      }
     } else {
       for (var key in collection) {
         iterator(collection[key], key, collection);
@@ -70,14 +70,14 @@
      }
   };
 
- 
+
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
   _.indexOf = function(array, target) {
     // TIP: Here's an example of a function that needs to iterate, which we've
     // implemented for you. Instead of using a standard `for` loop, though,
     // it uses the iteration helper `each`, which you will need to write.
-    
+
     var result = -1;
 
     _.each(array, function(item, index) {
@@ -129,7 +129,7 @@
       if (iterator !== undefined) {
         if (!iteratedArray.includes(iterator(item))) {
           iteratedArray.push(iterator(item));
-          returnArray.push(item);  
+          returnArray.push(item);
           }
         } else {
           console.log('in else');
@@ -138,12 +138,12 @@
           returnArray.push(item);
           console.log("returnArray", returnArray);
         }
-      }  
+      }
     });
     return returnArray;
   }
- 
-    
+
+
 
 
 
@@ -180,19 +180,19 @@
   // Reduces an array or object to a single value by repetitively calling
   // iterator(accumulator, item) for each item. accumulator should be
   // the return value of the previous iterator call.
-  //  
+  //
   // You can pass in a starting value for the accumulator as the third argument
   // to reduce. If no starting value is passed, the first element is used as
   // the accumulator, and is never passed to the iterator. In other words, in
   // the case where a starting value is not passed, the iterator is not invoked
   // until the second element, with the first element as its second argument.
-  //  
+  //
   // Example:
   //   var numbers = [1,2,3];
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-  //  
+  //
   //   var identity = _.reduce([5], function(total, number){
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
@@ -207,7 +207,7 @@
       });
     } else {
       memo = accumulator;
-      _.each(collection, function(item) { 
+      _.each(collection, function(item) {
       var result = iterator(memo, item);
       memo = result;
     });
@@ -277,7 +277,7 @@
         }
       }, false)
     }
-  }  
+  }
 
 
   /**
@@ -359,15 +359,15 @@
   // _.memoize should return a function that, when called, will check if it has
   // already computed the result for the given argument and return that value
   // instead if possible.
-  
+
   _.memoize = function(func) {
     //build up args array, return function
     //do a check with args to see if it's in storage
     //if args are in storage, return result
     //else func.apply(null, args)
-    //add args to storage
+    //add args to storage;
     //return result;
-    
+
     var storage = {};
     return function() {
     var args = JSON.stringify(arguments)
@@ -381,7 +381,7 @@
   };
 
 
-  
+
 
   // Delays a function for the given number of milliseconds, and then calls
   // it with the arguments supplied.

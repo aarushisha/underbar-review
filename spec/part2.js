@@ -33,7 +33,7 @@
          * Without knowing that mutation occured inside of reduceRight,
          * we would assume that `lastElement` is 5. But if inside of
          * reduceRight, we use the array method `pop`, we would permanently
-         * change `input` and our assumption would not longer be true,
+         * change `input` and our assumption would not longer be true;
          * `lastElement` would be 4 instead!
          *
          * The tricky part is that we have no way of knowing about the mutation
@@ -425,7 +425,7 @@
         memoSpy(10);
         expect(spy).to.have.been.calledOnce;
       });
-      
+
       it('should not run the memoized function twice when given a reference type as an argument', function() {
         // Be careful how you are checking if a set of arguments has been passed in already
         var spy = sinon.spy(function() { return 'Dummy output'; });

@@ -5,7 +5,7 @@
 
   var checkForNativeMethods = function(runUnderbarFunction) {
     it('should not use the native version of any underbar methods in its implementation', function() {
-      // These spies are set up in testSupport.js
+      // These spies are set up in testSupport.js;
       runUnderbarFunction();
       expect(Array.prototype.map.called).to.equal(false);
       expect(Array.prototype.indexOf.called).to.equal(false);
@@ -341,7 +341,7 @@
 
         expect(uniqueNumbers).to.not.equal(numbers);
       });
-      
+
       it('should maintain same array length', function() {
         var numbers = [1, 1, 2, 3];
         var shuffled = _.shuffle(numbers);
@@ -433,7 +433,7 @@
       it('should not mutate the input array', function() {
         var input = [1, 2, 3, 4, 5];
         var result = _.reduce(input, function(memo, item) { return item; });
-        
+
         /*
          * Mutation of inputs should be avoided without good justification otherwise
          * as it can often lead to hard to find bugs and confusing code!
