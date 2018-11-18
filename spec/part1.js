@@ -5,7 +5,7 @@
 
   var checkForNativeMethods = function(runUnderbarFunction) {
     it('should not use the native version of any underbar methods in its implementation', function() {
-      // These spies are set up in testSupport.js;
+      // These spies are set up in testSupport.js
       runUnderbarFunction();
       expect(Array.prototype.map.called).to.equal(false);
       expect(Array.prototype.indexOf.called).to.equal(false);

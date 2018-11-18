@@ -365,7 +365,7 @@
     //do a check with args to see if it's in storage
     //if args are in storage, return result
     //else func.apply(null, args)
-    //add args to storage;
+    //add args to storage
     //return result;
 
     var storage = {};
